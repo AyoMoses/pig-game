@@ -47,7 +47,9 @@ btnRoll.addEventListener('click', function () {
         document.getElementById(`current--${activePlayer}`).textContent = 0;
 
         // if active player is player 1 then switch to player 2 else leave as P1
-        currentScore = 0; // switch to 0 upon active player change
+        currentScore = 0; // reset to 0 upon active player change
+
+        // switching th active player. active becomes the current one 
         activePlayer = activePlayer === 0 ? 1 : 0;
 
         // toggle the class if its there if its Notification, add it. remeber you have it added in the html for P1
