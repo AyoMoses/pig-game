@@ -22,38 +22,71 @@ diceEl.classList.add('hidden');
 const scores = [0, 0]; //store the scores of both player
 let currentScore = 0;
 let activePlayer = 0;
+let playing = true; // a variable to hold the state of the game 
+
+const switchPlayer = function () {
+    // Switch to the next player if number 1 is rolled
+
+    // switch to 0 upon active player change
+    document.getElementById(`current--${activePlayer}`).textContent = 0;
+
+    // if active player is player 1 then switch to player 2 else leave as P1
+    currentScore = 0; // reset to 0 upon active player change
+
+    // switching th active player. active becomes the current one 
+    activePlayer = activePlayer === 0 ? 1 : 0;
+
+    // toggle the class if its there if its Notification, add it. remeber you have it added in the html for P1
+    player0El.classList.toggle('player--active');
+    player1El.classList.toggle('player--active');
+};
 
 
 // rolling dice functionality
 btnRoll.addEventListener('click', function () {
-    // 1. Generating a random dice roll 
-    // note Math.random() generates a number between 0 - 999999 not up to 1. Math trunc removes the integers. The times 6 returns 5 which is one lesser than the original number then we add 1 to get us to the intended value
-    const dice = Math.trunc(Math.random() * 6) + 1;
-    // 2. Display dice and bing src to dice random number
-    diceEl.classList.remove('hidden');
-    diceEl.src = `dice-${dice}.png`;
-    console.log(dice);
+    if (playing) { //since playing is already a boolean, no need to check if its === true
+
+        // 1. Generating a random dice roll 
+        // note Math.random() generates a number between 0 - 999999 not up to 1. Math trunc removes the integers. The times 6 returns 5 which is one lesser than the original number then we add 1 to get us to the intended value
+        const dice = Math.trunc(Math.random() * 6) + 1;
+        // 2. Display dice and bing src to dice random number
+        diceEl.classList.remove('hidden');
+        diceEl.src = `dice-${dice}.png`;
 
 
-    // 3. Check for a rolled dice number 1. If true, switch to next player
-    if (dice !== 1) {
-        // Add dice to current score
-        currentScore += dice;
-        document.getElementById(`current--${activePlayer}`).textContent = currentScore;
-    } else {
-        // Switch to the next player if number 1 is rolled
+        // 3. Check for a rolled dice number 1. If true, switch to next player
+        if (dice !== 1) {
+            // Add dice to current score
+            currentScore += dice;
+            document.getElementById(`current--${activePlayer}`).textContent = currentScore;
+        } else {
+            // Switch to the next player if number 1 is rolled
+            switchPlayer();
+        }
+    }
+})
 
-        // switch to 0 upon active player change
-        document.getElementById(`current--${activePlayer}`).textContent = 0;
 
-        // if active player is player 1 then switch to player 2 else leave as P1
-        currentScore = 0; // reset to 0 upon active player change
+// hold active player score and add to total score 
+btnHold.addEventListener('click', function () {
+    if (playing) {
+        // 1. add current score to active player's score 
+        scores[activePlayer] += currentScore;
+        // scores[1] = scores[1] + currentScore
 
-        // switching th active player. active becomes the current one 
-        activePlayer = activePlayer === 0 ? 1 : 0;
+        document.getElementById(`score--${activePlayer}`).textContent = scores[activePlayer];
 
-        // toggle the class if its there if its Notification, add it. remeber you have it added in the html for P1
-        player0El.classList.toggle('player--active');
-        player1El.classList.toggle('player--active');
+        // 2. check if player's score is >= 100
+        if (scores[activePlayer] >= 20) {
+            playing = false;
+            diceEl.classList.add('hidden');
+            // Finish the game
+            document.querySelector(`.player--${activePlayer}`).classList.add('player--winner');
+            document.querySelector(`.player--${activePlayer}`).classList.remove('player--active');
+
+        } else {
+            // Switch to the next player
+            switchPlayer();
+        }
     }
 })
