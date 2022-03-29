@@ -14,15 +14,31 @@ const btnNew = document.querySelector('.btn--new');
 const btnRoll = document.querySelector('.btn--roll');
 const btnHold = document.querySelector('.btn--hold');
 
-// starting conditions
-score0El.textContent = 0;
-score1El.textContent = 0;
-diceEl.classList.add('hidden');
+// FRO GLOBAL SCOPING OUT SIDE THE INIT FUNCTION WE DECLARE THE INIT STATE and reassign their values in the function
+let scores, currentScore, activePlayer, playing;
+// this makes them accessible everywhere due to global scoping 
 
-const scores = [0, 0]; //store the scores of both player
-let currentScore = 0;
-let activePlayer = 0;
-let playing = true; // a variable to hold the state of the game 
+// starting conditions
+// RESET TO INITIALIZATION STATE 
+const init = function () {
+    score0El.textContent = 0;
+    score1El.textContent = 0;
+    current0El.textContent = 0;
+    current1El.textContent = 0;
+
+    scores = [0, 0]; //store the scores of both player
+    currentScore = 0;
+    activePlayer = 0;
+    playing = true; // a variable to hold the state of the game 
+
+    diceEl.classList.add('hidden');
+    player0El.classList.remove('player--winner');
+    player1El.classList.remove('player--winner');
+    player0El.classList.add('player--active');
+    player1El.classList.remove('player--active');
+}
+// run the function so the function is initialized on page load
+init();
 
 const switchPlayer = function () {
     // Switch to the next player if number 1 is rolled
@@ -75,6 +91,7 @@ btnHold.addEventListener('click', function () {
         // scores[activePlayer] = scores[activePlayer] + currentScore
 
         document.getElementById(`score--${activePlayer}`).textContent = scores[activePlayer];
+        diceEl.classList.add('hidden');
 
         // 2. check if player's score is >= 100
         if (scores[activePlayer] >= 100) {
@@ -90,3 +107,7 @@ btnHold.addEventListener('click', function () {
         }
     }
 })
+
+
+// RESET VALUES ON CLICK FOR NEW GAME 
+btnNew.addEventListener('click', init)
