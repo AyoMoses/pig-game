@@ -18,6 +18,17 @@ const btnHold = document.querySelector('.btn--hold');
 let scores, currentScore, activePlayer, playing;
 // this makes them accessible everywhere due to global scoping 
 
+
+const playSound = function (sound) {
+    let soundEffect = new Audio(sound);
+    soundEffect.play();
+}
+const stopSound = function () {
+    let stopSound = new Audio('clap.wav');
+    stopSound.pause();
+    stopSound.currentTime = 0;
+}
+
 // starting conditions
 // RESET TO INITIALIZATION STATE 
 const init = function () {
@@ -39,16 +50,6 @@ const init = function () {
 }
 // run the function so the function is initialized on page load
 init();
-
-const playSound = function (sound) {
-    let soundEffect = new Audio(sound);
-    soundEffect.play();
-}
-const pauseSound = function (sound) {
-    let soundEffect = new Audio(sound);
-    soundEffect.pause();
-}
-
 
 const switchPlayer = function () {
     // Switch to the next player if number 1 is rolled
@@ -123,4 +124,4 @@ btnHold.addEventListener('click', function () {
 
 
 // RESET VALUES ON CLICK FOR NEW GAME 
-btnNew.addEventListener('click', init)
+btnNew.addEventListener('click', init);
