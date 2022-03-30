@@ -40,6 +40,16 @@ const init = function () {
 // run the function so the function is initialized on page load
 init();
 
+const playSound = function (sound) {
+    let soundEffect = new Audio(sound);
+    soundEffect.play();
+}
+const pauseSound = function (sound) {
+    let soundEffect = new Audio(sound);
+    soundEffect.pause();
+}
+
+
 const switchPlayer = function () {
     // Switch to the next player if number 1 is rolled
 
@@ -68,6 +78,7 @@ btnRoll.addEventListener('click', function () {
         // 2. Display dice and bing src to dice random number
         diceEl.classList.remove('hidden');
         diceEl.src = `dice-${dice}.png`;
+        playSound('click-sound.wav');
 
 
         // 3. Check for a rolled dice number 1. If true, switch to next player
@@ -92,14 +103,16 @@ btnHold.addEventListener('click', function () {
 
         document.getElementById(`score--${activePlayer}`).textContent = scores[activePlayer];
         diceEl.classList.add('hidden');
+        playSound('hold-sound.wav');
 
         // 2. check if player's score is >= 100
-        if (scores[activePlayer] >= 100) {
+        if (scores[activePlayer] >= 10) {
             playing = false;
             diceEl.classList.add('hidden');
             // Finish the game
             document.querySelector(`.player--${activePlayer}`).classList.add('player--winner');
             document.querySelector(`.player--${activePlayer}`).classList.remove('player--active');
+            playSound('clap.wav');
 
         } else {
             // Switch to the next player
