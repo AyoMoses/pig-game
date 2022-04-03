@@ -1,4 +1,16 @@
 'use strict';
+const closeModalBtn = document.querySelector('.close-modal');
+const modalOverlay = document.querySelector('.rules-modal-overlay');
+const modal = document.querySelector('.rules-modal');
+// MODAL DISPLAY ON PAGE LOAD 
+const closeModal = function () {
+    modalOverlay.classList.add('hidden');
+    modal.classList.add('hidden');
+}
+
+closeModalBtn.addEventListener('click', closeModal);
+modalOverlay.addEventListener('click', closeModal);
+// MODAL DISPLAY ON PAGE LOAD 
 
 // selecting elements
 const player0El = document.querySelector('.player--0')

@@ -53,6 +53,12 @@ main {
   .current-label {
     padding-top: 0;
   }
+  .rules-modal {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 70%;
+  }
 }
 
 .player {
@@ -189,3 +195,123 @@ main {
 .hidden {
   display: none;
 }
+
+.rules-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(199, 54, 95, 0.6);
+  backdrop-filter: blur(3px);
+  z-index: 500;
+  overflow-y: hidden;
+}
+
+.rules-modal__close-button {
+  background-color: transparent;
+  border: none;
+  outline: none;
+  width: max-content;
+  height: max-content;
+  cursor: pointer;
+}
+.rules-modal__close-button-icon {
+  margin-top: 9px;
+  margin-right: 16px;
+}
+
+.rules-modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 70%;
+  height: auto;
+  background-color: #fff;
+  box-shadow: 0 3rem 5rem rgba(0, 0, 0, 0.25);
+  z-index: 600;
+  overflow-y: hidden;
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+  padding-bottom: 2rem;
+}
+
+.rules-modal__inner {
+  width: 100%;
+  height: 100%;
+}
+
+.rules-modal__header {
+  width: 100%;
+  height: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.rules-modal__header-text {
+  color: #c7365f;
+  font-style: normal;
+  font-size: 24px;
+  line-height: 36px;
+  letter-spacing: 0;
+  font-weight: 700;
+  text-align: left;
+  text-transform: capitalize;
+  margin-top: 9px;
+  margin-left: 16px;
+}
+
+.rules-modal__line {
+  width: 100%;
+  border-bottom: 1px solid rgb(120, 117, 117);
+  margin-block: 21px;
+}
+.rules-modal__text {
+  color: #2f2f2f;
+  font-style: normal;
+  font-size: 18px;
+  line-height: 1.5;
+  letter-spacing: 0;
+  font-weight: 700;
+  text-align: left;
+  margin-block: 0;
+  padding-inline: 2.5rem;
+  list-style-image: url('/07-Pig-Game/icon-list-2.svg');
+  list-style-position: inside;
+}
+.rules-modal__text:not(:last-child) {
+  margin-bottom: 18px;
+}
+
+.change-color {
+  color: #c7365f;
+  font-weight: 700;
+}
+
+/* &__buttons {
+  width: 100%;
+  height: auto;
+  @include row;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  margin-bottom: toRem(20px);
+
+  &:not(:last-child) {
+    margin-right: toRem(50px);
+  }
+}
+
+&__btn {
+  @include flex-row;
+  width: fit-content;
+  height: 50px;
+  margin-right: toRem(30px);
+
+  &:not(:last-child) {
+    margin-bottom: toRem(30px);
+  }
+} */
