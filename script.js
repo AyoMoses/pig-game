@@ -6,10 +6,18 @@ const modal = document.querySelector('.rules-modal');
 const closeModal = function () {
     modalOverlay.classList.add('hidden');
     modal.classList.add('hidden');
+    localStorage.setItem('popupShown', 'true');
 }
-
 closeModalBtn.addEventListener('click', closeModal);
 modalOverlay.addEventListener('click', closeModal);
+
+// displaying content once using local storage
+
+if (localStorage.length > 0) {
+    modalOverlay.classList.add('hidden');
+    modal.classList.add('hidden');
+}
+
 // MODAL DISPLAY ON PAGE LOAD 
 
 // selecting elements
