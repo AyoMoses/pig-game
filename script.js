@@ -7,13 +7,14 @@ const closeModal = function () {
     modalOverlay.classList.add('hidden');
     modal.classList.add('hidden');
     localStorage.setItem('popupShown', 'true');
+    console.log('it has been clicked');
 }
 closeModalBtn.addEventListener('click', closeModal);
 modalOverlay.addEventListener('click', closeModal);
 
 // displaying content once using local storage
 
-if (localStorage.length > 0) {
+if (localStorage.getItem('popupShown') !== null) {
     modalOverlay.classList.add('hidden');
     modal.classList.add('hidden');
 }
